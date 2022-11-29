@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -14,7 +14,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
-
+import { Link } from "react-router-dom";
 interface INavbar {}
 type Anchor = "left";
 const Navbar: React.FunctionComponent<INavbar> = () => {
@@ -48,14 +48,16 @@ const Navbar: React.FunctionComponent<INavbar> = () => {
           ["home", "/"],
           ["astronomy picture", "/apod"],
         ].map((text, index) => (
-          <ListItem key={text[0]} disablePadding>
-            <ListItemButton href={text[1]}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text[0]} />
-            </ListItemButton>
-          </ListItem>
+          <Link key={index} to={text[1]} style={{ textDecoration: "none" }}>
+            <ListItem  disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon>
+                <ListItemText style={{ textDecoration: "none" }} secondary={text[0]} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
         ))}
       </List>
       <Divider />

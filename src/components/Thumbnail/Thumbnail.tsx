@@ -5,6 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { Link } from "react-router-dom";
 interface IThumbnail{
   img?: string
   title?: string
@@ -14,7 +15,7 @@ interface IThumbnail{
 
 const Thumbnail: React.FunctionComponent<IThumbnail> = (props: IThumbnail) => {
   return (
-    <Card sx={{ maxWidth: 345, margin: '2em' }}>
+    <Card sx={{ maxWidth: 345, margin: '2em', boxSizing:'content-box' }}>
       <CardMedia
         component="img"
         height="140"
@@ -30,7 +31,7 @@ const Thumbnail: React.FunctionComponent<IThumbnail> = (props: IThumbnail) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" href={props.link}>Learn More</Button>
+        <Link to={props.link!} style={{ textDecoration: 'none' }}><Button size="small">Learn More</Button></Link>
       </CardActions>
     </Card>
   )

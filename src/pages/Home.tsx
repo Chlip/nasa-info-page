@@ -1,17 +1,17 @@
 import { Box } from "@mui/material";
 import React from "react";
 import Thumbnail from "../components/Thumbnail/Thumbnail";
-import { useGetPictureQuery } from "../services/apodApi";
-
+import {  useGetRecentPictureQuery } from "../services/apodApi";
+import CircularProgress from '@mui/material/CircularProgress';
 interface IHomePageProps {}
 
 const HomePage: React.FunctionComponent<IHomePageProps> = () => {
-  const { data, error, isLoading } = useGetPictureQuery("2017-07-09");
+  const { data, error, isLoading } = useGetRecentPictureQuery('')
   console.log(data);
 
   return (
-    <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
-      {!isLoading && (
+    <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center",alignItems:"center" }}>
+      {isLoading ?(<CircularProgress color="secondary" />): (
         <Thumbnail
           img={data.url}
           title={"Astronomy Picture Of The Day"}
@@ -21,7 +21,7 @@ const HomePage: React.FunctionComponent<IHomePageProps> = () => {
           link={'/apod'}
         ></Thumbnail>
       )}
-
+      
       <Thumbnail></Thumbnail>
       <Thumbnail></Thumbnail>
     </Box>

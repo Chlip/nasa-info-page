@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 interface dateRange {
-  startDate: string;
-  endDate: string;
+  sd: string;
+  ed: string;
 }
 
 // Define a service using a base URL and expected endpoints
@@ -13,7 +13,7 @@ export const apodApi = createApi({
       query: (date: string) => `?api_key=${process.env.REACT_APP_API_KEY}&date=${date}`,
     }),
     getPicturesRange: builder.query({
-      query: (dateRange: dateRange) => `?api_key=${process.env.REACT_APP_API_KEY}&start_date=${dateRange.startDate}&end_date=${dateRange.endDate}`,
+      query: (dateRange: dateRange) => `?api_key=${process.env.REACT_APP_API_KEY}&start_date=${dateRange.sd}&end_date=${dateRange.ed}`,
     }),
     getRecentPicture: builder.query({
       query: () => `?api_key=${process.env.REACT_APP_API_KEY}`,

@@ -25,8 +25,9 @@ const Application: React.FunctionComponent<IApplicationProps> = () => {
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
-        <Navbar />
+        
         <BrowserRouter>
+        <Navbar />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="about" element={<AboutPage />} />
