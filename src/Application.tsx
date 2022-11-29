@@ -6,6 +6,9 @@ import HomePage from "./pages/Home";
 import { createTheme } from "@mui/material/styles";
 import { ThemeProvider } from "@mui/system";
 import APODPage from "./pages/APODPage";
+import MarsWeatherPage from "./pages/MarsWeatherPage";
+import MarsRoverPage from "./pages/MarsRoverPage";
+import SingleRoverPage from "./pages/SingleRoverPage";
 
 
 const theme = createTheme({
@@ -30,8 +33,11 @@ const Application: React.FunctionComponent<IApplicationProps> = () => {
         <Navbar />
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="about" element={<AboutPage />} />
-            <Route path="apod" element={<APODPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/apod" element={<APODPage />} />
+            <Route path="/marsweather" element={<MarsWeatherPage />} />
+            <Route path="/marsrover" element={<MarsRoverPage />} />
+            <Route path="/marsrover/:roverName" element={<SingleRoverPage />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
