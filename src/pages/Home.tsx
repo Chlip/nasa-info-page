@@ -41,8 +41,6 @@ const HomePage: React.FunctionComponent<IHomePageProps> = () => {
           }
           link={'/marsrover'}
         ></Thumbnail>
-      <Thumbnail></Thumbnail>
-      <Thumbnail></Thumbnail>
     </Box>
   );
 };
