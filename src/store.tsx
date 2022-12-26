@@ -1,12 +1,14 @@
 import { configureStore,combineReducers } from "@reduxjs/toolkit";
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { apodApi } from './services/apodApi'
+import { asteroidsApi } from "./services/asteroidsApi";
 import { marsRoverPhotoApi } from "./services/marsRoverPhotoApi";
 import { marsWeatherApi } from "./services/marsWeatherApi";
 const rootReducer = combineReducers({
   [apodApi.reducerPath]: apodApi.reducer,
   [marsWeatherApi.reducerPath]: marsWeatherApi.reducer,
   [marsRoverPhotoApi.reducerPath]: marsRoverPhotoApi.reducer,
+  [asteroidsApi.reducerPath]: asteroidsApi.reducer,
 })
 
 export const store = configureStore({
@@ -14,7 +16,7 @@ export const store = configureStore({
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat([apodApi.middleware, marsWeatherApi.middleware, marsRoverPhotoApi.middleware]),
+    getDefaultMiddleware().concat([apodApi.middleware, marsWeatherApi.middleware, marsRoverPhotoApi.middleware, asteroidsApi.middleware]),
 });
 
 // optional, but required for refetchOnFocus/refetchOnReconnect behaviors

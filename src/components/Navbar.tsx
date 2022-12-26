@@ -16,10 +16,10 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { Link } from "react-router-dom";
 interface INavbar {}
-type Anchor = "left";
+type Anchor = "right";
 const Navbar: React.FunctionComponent<INavbar> = () => {
   const [state, setState] = React.useState({
-    left: false,
+    right: false,
   });
   const toggleDrawer =
     (anchor: Anchor, open: boolean) =>
@@ -91,18 +91,18 @@ const Navbar: React.FunctionComponent<INavbar> = () => {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
-            onClick={toggleDrawer("left", true)}
+            onClick={toggleDrawer("right", true)}
           >
             <MenuIcon />
           </IconButton>
         </Toolbar>
       </AppBar>
       <Drawer
-        anchor={"left"}
-        open={state["left"]}
-        onClose={toggleDrawer("left", false)}
+        anchor={"right"}
+        open={state["right"]}
+        onClose={toggleDrawer("right", false)}
       >
-        {list("left")}
+        {list("right")}
       </Drawer>
     </Box>
   );
