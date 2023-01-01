@@ -4,7 +4,6 @@ interface dateRange {
   ed: string;
 }
 
-// Define a service using a base URL and expected endpoints
 export const apodApi = createApi({
   reducerPath: "apodApi",
   baseQuery: fetchBaseQuery({ baseUrl: "https://api.nasa.gov/planetary/apod" }),
@@ -21,8 +20,7 @@ export const apodApi = createApi({
   }),
 });
 
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
+
 export const {
   useGetPictureQuery,
   useGetPicturesRangeQuery,

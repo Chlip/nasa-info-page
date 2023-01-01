@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 
-// Define a service using a base URL and expected endpoints
+
 export const marsRoverPhotoApi = createApi({
   reducerPath: "marsRoverPhotoApi",
   baseQuery: fetchBaseQuery({ baseUrl: `https://api.nasa.gov/mars-photos/api/v1/` }),
@@ -15,8 +15,7 @@ export const marsRoverPhotoApi = createApi({
   }),
 });
 
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
+
 export const {
   useGetRoversQuery,
   useGetRoverLatestPhotoQuery

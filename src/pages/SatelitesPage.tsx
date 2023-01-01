@@ -29,7 +29,7 @@ const SatelitesPage: React.FunctionComponent<ISatelitesPage> = () => {
   const [endDate, setEndDate] = useState(new Date().toJSON().slice(0, 10));
   const [satRoutes, setSatRoutes] = useState<any>([]);
   const { data, error, isLoading, isFetching } = useGetCollectionQuery({
-    ps: 10,
+    ps: 100,
     sort: "popularity",
   });
   //console.log(data);
