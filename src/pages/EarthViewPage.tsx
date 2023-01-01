@@ -12,21 +12,21 @@ import React, { useState, useEffect, Fragment } from "react";
 
 import CircularProgress from "@mui/material/CircularProgress";
 import { useGetInfoQuery } from "../services/epicApi";
+import dayjs, { Dayjs } from "dayjs";
+import { FormControlLabel, Switch, TextField } from "@mui/material";
+import { LocalizationProvider, MobileDatePicker } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 interface IEarthViewPage {}
 
 const EarthViewPage: React.FunctionComponent<IEarthViewPage> = () => {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
+  const [pickDate, setPickDate] = React.useState<string | null>(
+    dayjs().add(-1, "day").format().slice(0, 10)
+  );
+  const [picType, setPicType] = useState("enhanced");
 
-  const [startDate, setStartDate] = useState(new Date().toJSON().slice(0, 10));
-  const [endDate, setEndDate] = useState(new Date().toJSON().slice(0, 10));
-  const [picType, setPicType] = useState("natural");
-  const { data, error, isLoading, isFetching } = useGetInfoQuery({
-    picType: "natural",
-    date: "2022-12-31",
-  });
-  console.log(data);
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -38,57 +38,84 @@ const EarthViewPage: React.FunctionComponent<IEarthViewPage> = () => {
   const handleStepChange = (step: number) => {
     setActiveStep(step);
   };
-
+  const handleChange = (newpickDate: Dayjs | null) => {
+    setPickDate(newpickDate!.format().slice(0, 10));
+  };
+  const { data, currentData, error, isLoading, isFetching } = useGetInfoQuery({
+    picType: picType,
+    date: pickDate!,
+  });
+  console.log(pickDate);
+  console.log(isLoading);
+  console.log(isFetching);
+  console.log(data);
   return (
-    <Box
-      sx={{ width:'100%', height:'80vh',flexGrow: 1 }}
-    >
-      {!isLoading && !isFetching && data ? (
+    <Box>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          my: 5,
+          width: "40%",
+          mx: "auto",
+        }}
+      >
+        <LocalizationProvider sx={{ mt: 5 }} dateAdapter={AdapterDayjs}>
+          <MobileDatePicker
+            label="Choose Date"
+            inputFormat="MM/DD/YYYY"
+            maxDate={dayjs()}
+            value={pickDate}
+            onChange={handleChange}
+            renderInput={(params) => <TextField {...params} />}
+            minDate={dayjs(new Date(2015, 10, 31))}
+          />
+        </LocalizationProvider>
+        <FormControlLabel
+        control={<Switch defaultChecked />}
+        onClick={() => {
+          setPicType(
+            picType === "natural"
+              ? "enhanced"
+              : "natural"
+          );
+        }}
+        label={picType}
+      />
+      </Box>
+      {!isLoading && !isFetching && data.length===0 ? (
+        <Typography sx={{ textAlign: "center" }}>
+          No pictures for this day
+        </Typography>
+        
+      ) : !isLoading && !isFetching ? (
         <Fragment>
-          <Paper
-            square
-            elevation={0}
+          <Typography sx={{ textAlign: "center" }}>
+            {data[activeStep].date}
+          </Typography>
+          <Typography sx={{ textAlign: "center" }}>
+            {data[activeStep].caption}
+          </Typography>
+          <Box
+            component="img"
             sx={{
-              display: "flex",
-              alignItems: "center",
-              height: 50,
-              pl: 2,
-              bgcolor: "background.default",
+              maxHeight: "60vh",
+              display: "block",
+              maxWidth: "50%",
+              overflow: "hidden",
+              width: "auto",
+              margin: "auto",
             }}
-          ></Paper>
-          <SwipeableViews
-            axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-            index={activeStep}
-            onChangeIndex={handleStepChange}
-            enableMouseEvents
+            src={`https://epic.gsfc.nasa.gov/archive/${picType}/${
+              data[activeStep].date.split("-")[0]
+            }/${data[activeStep].date.split("-")[1]}/${data[activeStep].date
+              .split("-")[2]
+              .slice(0, 2)}/png/${data[activeStep].image}.png`}
+            alt={data[activeStep].image}
             
-          >
-            {!isLoading && !isFetching && data
-              ? data.map((el: any, index: any) => (
-                  <div key={el.image}>
-                    {Math.abs(activeStep - index) <= 2 ? (
-                      <Box
-                        component="img"
-                        sx={{
-                          height: "auto",
-                          display: "block",
-                          maxWidth: "100%",
-                          overflow: "hidden",
-                          width: "100%",
-                        }}
-                        src={`https://epic.gsfc.nasa.gov/archive/${'natural'}/${
-                          el.date.split("-")[0]
-                        }/${el.date.split("-")[1]}/${el.date
-                          .split("-")[2]
-                          .slice(0, 2)}/png/${el.image}.png`}
-                        alt={el.image}
-                      />
-                    ) : null}
-                  </div>
-                ))
-              : null}
-          </SwipeableViews>
+          />
           <MobileStepper
+            variant="text"
             steps={data.length}
             position="static"
             activeStep={activeStep}
@@ -125,9 +152,34 @@ const EarthViewPage: React.FunctionComponent<IEarthViewPage> = () => {
       ) : (
         ""
       )}
-    
     </Box>
   );
 };
 
 export default EarthViewPage;
+{
+  /* {!isLoading && !isFetching && data
+              ? data.map((el: any, index: any) => (
+                  <div key={el.image}>
+                    {Math.abs(activeStep - index) <= 2 ? (
+                      <Box
+                        component="img"
+                        sx={{
+                          height: "auto",
+                          display: "block",
+                          maxWidth: "40%",
+                          overflow: "hidden",
+                          width: "30%",
+                        }}
+                        src={`https://epic.gsfc.nasa.gov/archive/${'natural'}/${
+                          el.date.split("-")[0]
+                        }/${el.date.split("-")[1]}/${el.date
+                          .split("-")[2]
+                          .slice(0, 2)}/png/${el.image}.png`}
+                        alt={el.image}
+                      />
+                    ) : <CircularProgress color="secondary" />}
+                  </div>
+                ))
+              : null} */
+}

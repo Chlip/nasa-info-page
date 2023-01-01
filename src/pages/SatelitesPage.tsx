@@ -29,10 +29,10 @@ const SatelitesPage: React.FunctionComponent<ISatelitesPage> = () => {
   const [endDate, setEndDate] = useState(new Date().toJSON().slice(0, 10));
   const [satRoutes, setSatRoutes] = useState<any>([]);
   const { data, error, isLoading, isFetching } = useGetCollectionQuery({
-    ps: 100,
+    ps: 10,
     sort: "popularity",
   });
-  //console.log(data);
+  console.log(data);
   const sat =
     !isLoading &&
     data.member.map(
@@ -73,7 +73,7 @@ const SatelitesPage: React.FunctionComponent<ISatelitesPage> = () => {
     <React.Fragment>
       <MapContainer
         center={[51.505, -0.09]}
-        zoom={0}
+        zoom={4}
         scrollWheelZoom={true}
         style={{ width: "100vw", height: "93vh" }}
       >

@@ -15,7 +15,7 @@ export const epicApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "https://epic.gsfc.nasa.gov/" }),
   endpoints: (builder) => ({
     getInfo: builder.query({
-      query: (queryParamsInfo: queryParamsInfo) => `api/${queryParamsInfo.picType}/${queryParamsInfo.date}`,
+      query: (queryParamsInfo: queryParamsInfo) => `api/${queryParamsInfo.picType}/date/${queryParamsInfo.date}`,
     }),
     getPicture: builder.query({
         query: (queryParamsPic: queryParamsPic) => `archive/${queryParamsPic.picType}/${queryParamsPic.date[0]}/${queryParamsPic.date[1]}/${queryParamsPic.date[2]}/${queryParamsPic.picExtension}/${queryParamsPic.imageName}.${queryParamsPic.picExtension}`,
