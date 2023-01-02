@@ -12,6 +12,7 @@ import SingleRoverPage from "./pages/SingleRoverPage";
 import AsteroidsPage from "./pages/AsteroidsPage";
 import SatelitesPage from "./pages/SatelitesPage";
 import EarthViewPage from "./pages/EarthViewPage";
+import EarthWeatherEvents from "./pages/EarthWeatherEvents";
 
 
 const theme = createTheme({
@@ -44,6 +45,7 @@ const Application: React.FunctionComponent<IApplicationProps> = () => {
             <Route path="/asteroids" element={<AsteroidsPage />} />
             <Route path="/satelites" element={<SatelitesPage />} />
             <Route path="/earthview" element={<EarthViewPage />} />
+            <Route path="/earthweather" element={<EarthWeatherEvents />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

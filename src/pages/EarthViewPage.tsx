@@ -152,34 +152,9 @@ const EarthViewPage: React.FunctionComponent<IEarthViewPage> = () => {
       ) : (
         ""
       )}
+      
     </Box>
   );
 };
 
 export default EarthViewPage;
-{
-  /* {!isLoading && !isFetching && data
-              ? data.map((el: any, index: any) => (
-                  <div key={el.image}>
-                    {Math.abs(activeStep - index) <= 2 ? (
-                      <Box
-                        component="img"
-                        sx={{
-                          height: "auto",
-                          display: "block",
-                          maxWidth: "40%",
-                          overflow: "hidden",
-                          width: "30%",
-                        }}
-                        src={`https://epic.gsfc.nasa.gov/archive/${'natural'}/${
-                          el.date.split("-")[0]
-                        }/${el.date.split("-")[1]}/${el.date
-                          .split("-")[2]
-                          .slice(0, 2)}/png/${el.image}.png`}
-                        alt={el.image}
-                      />
-                    ) : <CircularProgress color="secondary" />}
-                  </div>
-                ))
-              : null} */
-}
