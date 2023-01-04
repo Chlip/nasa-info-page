@@ -16,6 +16,9 @@ import {
   YAxis,
   Legend,
   Tooltip,
+  Bar,
+  BarChart,
+  ResponsiveContainer,
 } from "recharts";
 import Thumbnail from "../components/Thumbnail/Thumbnail";
 import { useGetRoverLatestPhotoQuery } from "../services/marsRoverPhotoApi";
@@ -44,6 +47,20 @@ const SingleRoverPage: React.FunctionComponent<ISingleRoverPage> = () => {
         cameraName: e.camera.full_name,
       };
     });
+  const counts: any = [];
+  if (!isLoading) {
+    for (const el of modifiedData) {
+      counts[el.camera] = counts[el.camera] ? counts[el.camera] + 1 : 1;
+    }
+  }
+  console.log(counts);
+  let picturesPerCamera = [];
+  if (!isLoading && counts !== null) {
+    for (const [key, value] of Object.entries(counts)) {
+      console.log(`${key}: ${value}`);
+      picturesPerCamera.push({ name: `${key}`, amount: `${value}` });
+    }
+  }
   return (
     <React.Fragment>
       <Box
@@ -62,15 +79,16 @@ const SingleRoverPage: React.FunctionComponent<ISingleRoverPage> = () => {
               <DataGrid rows={modifiedData} columns={columns} />
             </div>
             <Box sx={{ display: "flex", flexDirection: "column" }}>
-              <ScatterChart width={400} height={400} data={modifiedData}>
-                <Scatter name="id" dataKey={'id'} fill="#8884d8" />
-                
-                <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-                <XAxis dataKey={"date"} />
-                <YAxis />
-                <Tooltip />
-                <Legend verticalAlign="top" height={36} />
-              </ScatterChart>
+              <ResponsiveContainer width="95%" height={500}>
+                <BarChart data={picturesPerCamera}>
+                  <CartesianGrid />
+                  <XAxis dataKey="name" />
+                  <YAxis type="number" domain={[0, modifiedData.length]} />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="amount" fill="#8884d8" />
+                </BarChart>
+              </ResponsiveContainer>
               <ImageList
                 sx={{ width: "100%", height: 450 }}
                 variant="quilted"

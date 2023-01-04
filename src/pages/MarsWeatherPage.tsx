@@ -19,6 +19,7 @@ import {
   Legend,
   Scatter,
   ScatterChart,
+  ResponsiveContainer,
 } from "recharts";
 
 interface IMarsWeatherPage {}
@@ -86,79 +87,90 @@ const MarsWeatherPage: React.FunctionComponent<IMarsWeatherPage> = () => {
         <Box
           sx={{
             display: "flex",
+            flexDirection: "row",
             flexWrap: "wrap",
             justifyContent: "center",
             alignItems: "start",
             p: 4,
           }}
         >
-          <FormControl sx={{m:1}}>
-            <InputLabel id="select-paramX">Select X</InputLabel>
-            <Select
-              labelId="select-paramX"
-              value={paramX}
-              label="X"
-              onChange={(e: any) => {
-                setParamX(e.target.value);
-              }}
+         
+            <FormControl sx={{ m: 1 }}>
+              <InputLabel id="select-paramX">Select X</InputLabel>
+              <Select
+                labelId="select-paramX"
+                value={paramX}
+                label="X"
+                onChange={(e: any) => {
+                  setParamX(e.target.value);
+                }}
+              >
+                <MenuItem value={"min"}>min temp</MenuItem>
+                <MenuItem value={"max"}>max temp</MenuItem>
+                <MenuItem value={"pressure"}>pressure</MenuItem>
+                <MenuItem value={"sunset"}>sunset</MenuItem>
+                <MenuItem value={"sunrise"}>sunrise</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl sx={{ m: 1 }}>
+              <InputLabel id="select-paramY">Select Y</InputLabel>
+              <Select
+                labelId="select-paramY"
+                value={paramY}
+                label="Y"
+                onChange={(e: any) => {
+                  setParamY(e.target.value);
+                }}
+              >
+                <MenuItem value={"min"}>min temp</MenuItem>
+                <MenuItem value={"max"}>max temp</MenuItem>
+                <MenuItem value={"pressure"}>pressure</MenuItem>
+                <MenuItem value={"sunset"}>sunset</MenuItem>
+                <MenuItem value={"sunrise"}>sunrise</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl sx={{ m: 1 }}>
+              <InputLabel id="select-amount">Amount</InputLabel>
+              <Select
+                labelId="select-amount"
+                value={amount}
+                label="Y"
+                onChange={(e: any) => {
+                  setAmount(e.target.value);
+                }}
+              >
+                <MenuItem value={10}>10</MenuItem>
+                <MenuItem value={20}>20</MenuItem>
+                <MenuItem value={50}>50</MenuItem>
+              </Select>
+            </FormControl>
+          
+          <ResponsiveContainer width="95%" height={500}>
+            <ScatterChart  data={d}>
+              <Scatter name="max" dataKey={paramX} fill="#8884d8" />
+              <Scatter name="min" dataKey={paramY} fill="#82ca9d" />
+              <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+              <XAxis dataKey={"date"} />
+              <YAxis />
+              <Tooltip />
+              <Legend verticalAlign="top" height={36} />
+            </ScatterChart>
+          </ResponsiveContainer>
+          <ResponsiveContainer width="95%" height={500}>
+            <LineChart
+             
+              data={d}
+              margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
             >
-              <MenuItem value={"min"}>min temp</MenuItem>
-              <MenuItem value={"max"}>max temp</MenuItem>
-            </Select>
-          </FormControl>
-          <FormControl sx={{m:1}}>
-            <InputLabel id="select-paramY">Select Y</InputLabel>
-            <Select
-              labelId="select-paramY"
-              value={paramY}
-              label="Y"
-              onChange={(e: any) => {
-                setParamY(e.target.value);
-              }}
-            >
-              <MenuItem value={"min"}>min temp</MenuItem>
-              <MenuItem value={"max"}>max temp</MenuItem>
-            </Select>
-          </FormControl>
-          <FormControl sx={{m:1}}>
-            <InputLabel id="select-amount">Amount</InputLabel>
-            <Select
-              labelId="select-amount"
-              value={amount}
-              label="Y"
-              onChange={(e: any) => {
-                setAmount(e.target.value);
-              }}
-            >
-              <MenuItem value={10}>10</MenuItem>
-              <MenuItem value={20}>20</MenuItem>
-              <MenuItem value={50}>50</MenuItem>
-            </Select>
-          </FormControl>
-          <ScatterChart width={400} height={400} data={d}>
-            <Scatter name="max" dataKey={paramX} fill="#8884d8" />
-            <Scatter name="min" dataKey={paramY} fill="#82ca9d" />
-            <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-            <XAxis dataKey={"date"} />
-            <YAxis />
-            <Tooltip />
-            <Legend verticalAlign="top" height={36} />
-          </ScatterChart>
-
-          <LineChart
-            width={400}
-            height={400}
-            data={d}
-            margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
-          >
-            <Line type="monotone" dataKey={paramX} stroke="#8884d8" />
-            <Line type="monotone" dataKey={paramY} stroke="#82ca9d" />
-            <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-            <XAxis dataKey={"date"} />
-            <YAxis />
-            <Tooltip />
-            <Legend verticalAlign="top" height={36} />
-          </LineChart>
+              <Line type="monotone" dataKey={paramX} stroke="#8884d8" />
+              <Line type="monotone" dataKey={paramY} stroke="#82ca9d" />
+              <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+              <XAxis dataKey={"date"} />
+              <YAxis />
+              <Tooltip />
+              <Legend verticalAlign="top" height={36} />
+            </LineChart>
+          </ResponsiveContainer>
         </Box>
       </Box>
     </React.Fragment>

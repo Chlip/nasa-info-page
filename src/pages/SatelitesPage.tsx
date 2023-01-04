@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import React, { Fragment, useEffect, useState } from "react";
 import {
   MapContainer,
@@ -25,12 +25,12 @@ L.Marker.prototype.options.icon = DefaultIcon;
 interface ISatelitesPage {}
 
 const SatelitesPage: React.FunctionComponent<ISatelitesPage> = () => {
-  const [startDate, setStartDate] = useState(new Date().toJSON().slice(0, 10));
-  const [endDate, setEndDate] = useState(new Date().toJSON().slice(0, 10));
+  const [numberOfSat, setNumberOfSat] = useState(10);
+  const [sortSatBy, setSortSatBy] = useState("popularity");
   const [satRoutes, setSatRoutes] = useState<any>([]);
   const { data, error, isLoading, isFetching } = useGetCollectionQuery({
-    ps: 10,
-    sort: "popularity",
+    ps: numberOfSat,
+    sort: sortSatBy,
   });
   console.log(data);
   const sat =
@@ -44,6 +44,7 @@ const SatelitesPage: React.FunctionComponent<ISatelitesPage> = () => {
   //   const latLonObj = !isLoading && !isFetching && getLatLngObj(sat[0]);
   //   console.log(latLonObj)
   useEffect(() => {
+    setSatRoutes([])
     !isLoading &&
       !isFetching &&
       sat.length != 0 &&
@@ -71,6 +72,50 @@ const SatelitesPage: React.FunctionComponent<ISatelitesPage> = () => {
   console.log(satRoutes);
   return (
     <React.Fragment>
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          alignItems: "start",
+          p: 4,
+        }}
+      >
+      <FormControl sx={{ m: 1, minWidth:"150px" }}>
+        <InputLabel id="select-numberOfSat">Number of Satelites</InputLabel>
+        <Select
+          labelId="select-numberOfSat"
+          value={numberOfSat}
+          label="Number of Satelites"
+          onChange={(e: any) => {
+            setNumberOfSat(e.target.value);
+          }}
+        >
+          <MenuItem value={5}>5</MenuItem>
+          <MenuItem value={10}>10</MenuItem>
+          <MenuItem value={20}>20</MenuItem>
+          <MenuItem value={40}>40</MenuItem>
+          <MenuItem value={100}>100</MenuItem>
+        </Select>
+      </FormControl>
+      <FormControl sx={{ m: 1, minWidth:"150px" }}>
+        <InputLabel id="select-sortSatBy">Select Satelite Sort</InputLabel>
+        <Select
+          labelId="select-sortSatBy"
+          value={sortSatBy}
+          label="select-sat-sort"
+          onChange={(e: any) => {
+            setSortSatBy(e.target.value);
+          }}
+        >
+          <MenuItem value={"period"}>period</MenuItem>
+          <MenuItem value={"popularity"}>popularity</MenuItem>
+          <MenuItem value={"inclination"}>inclination</MenuItem>
+          <MenuItem value={"eccentricity"}>eccentricity</MenuItem>
+          <MenuItem value={"name"}>name</MenuItem>
+          <MenuItem value={"id"}>id</MenuItem>
+        </Select>
+      </FormControl>
       <MapContainer
         center={[51.505, -0.09]}
         zoom={4}
@@ -97,9 +142,7 @@ const SatelitesPage: React.FunctionComponent<ISatelitesPage> = () => {
                 >
                   <Tooltip sticky>{el[0]}</Tooltip>
                 </Polyline>
-                <Marker
-                  position={[ el[2].lat, el[2].lng]}
-                >
+                <Marker position={[el[2].lat, el[2].lng]}>
                   <Popup>{el[0]}</Popup>
                 </Marker>
               </Fragment>
@@ -107,6 +150,7 @@ const SatelitesPage: React.FunctionComponent<ISatelitesPage> = () => {
           })}
         </SVGOverlay>
       </MapContainer>
+      </Box>
     </React.Fragment>
   );
 };
