@@ -14,7 +14,7 @@ const HomePage: React.FunctionComponent<IHomePageProps> = () => {
 
   return (
     <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center",alignItems:"start" }}>
-      {isLoading ?(<CircularProgress color="secondary" />): (
+      {isLoading ?'': (
         <Thumbnail
           img={data.url}
           title={"Astronomy Picture Of The Day"}
@@ -42,7 +42,7 @@ const HomePage: React.FunctionComponent<IHomePageProps> = () => {
           link={'/marsrover'}
         ></Thumbnail>
         <Thumbnail
-          img={'https://mars.nasa.gov/mars2020-raw-images/pub/ods/surface/sol/00629/ids/edr/browse/ncam/NLF_0629_0722798091_508ECM_N0302188NCAM03629_12_095J01_1200.jpg'}
+          img={'https://apod.nasa.gov/apod/image/0406/idadactyl_galileo_big.gif'}
           title={"Asteroids Near Earth"}
           text={
             "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aut maxime sint temporibus incidunt vel deserunt unde, qui voluptates voluptate, a saepe dolorem vero tenetur consectetur quisquam ducimus. Libero, laboriosam quia?"
@@ -50,7 +50,7 @@ const HomePage: React.FunctionComponent<IHomePageProps> = () => {
           link={'/asteroids'}
         ></Thumbnail>
         <Thumbnail
-          img={'https://mars.nasa.gov/mars2020-raw-images/pub/ods/surface/sol/00629/ids/edr/browse/ncam/NLF_0629_0722798091_508ECM_N0302188NCAM03629_12_095J01_1200.jpg'}
+          img={'https://apod.nasa.gov/apod/image/0208/earthlights02_dmsp_big.jpg'}
           title={"Satelites Near Earth"}
           text={
             "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aut maxime sint temporibus incidunt vel deserunt unde, qui voluptates voluptate, a saepe dolorem vero tenetur consectetur quisquam ducimus. Libero, laboriosam quia?"
@@ -58,7 +58,7 @@ const HomePage: React.FunctionComponent<IHomePageProps> = () => {
           link={'/satelites'}
         ></Thumbnail>
         <Thumbnail
-          img={'https://mars.nasa.gov/mars2020-raw-images/pub/ods/surface/sol/00629/ids/edr/browse/ncam/NLF_0629_0722798091_508ECM_N0302188NCAM03629_12_095J01_1200.jpg'}
+          img={'https://apod.nasa.gov/apod/image/0501/earth_apollo17_big.gif'}
           title={"Earth View From Space"}
           text={
             "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aut maxime sint temporibus incidunt vel deserunt unde, qui voluptates voluptate, a saepe dolorem vero tenetur consectetur quisquam ducimus. Libero, laboriosam quia?"
@@ -66,7 +66,7 @@ const HomePage: React.FunctionComponent<IHomePageProps> = () => {
           link={'/earthview'}
         ></Thumbnail>
         <Thumbnail
-          img={'https://mars.nasa.gov/mars2020-raw-images/pub/ods/surface/sol/00629/ids/edr/browse/ncam/NLF_0629_0722798091_508ECM_N0302188NCAM03629_12_095J01_1200.jpg'}
+          img={'https://apod.nasa.gov/apod/image/9703/seaice_sts45_big.jpg'}
           title={"Earth Weather From Space"}
           text={
             "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aut maxime sint temporibus incidunt vel deserunt unde, qui voluptates voluptate, a saepe dolorem vero tenetur consectetur quisquam ducimus. Libero, laboriosam quia?"

@@ -49,6 +49,10 @@ const Navbar: React.FunctionComponent<INavbar> = () => {
           ["astronomy picture", "/apod"],
           ["mars weather", "/marsweather"],
           ["mars rover", "/marsrover"],
+          ["earth weather events", "/earthweather"],
+          ["near earth asteroids", "/asteroids"],
+          ["earth satelites", "/satelites"],
+          ["earth satelite view", "/earthview"],
         ].map((text, index) => (
           <Link key={index} to={text[1]} style={{ textDecoration: "none" }}>
             <ListItem  disablePadding>
@@ -62,19 +66,7 @@ const Navbar: React.FunctionComponent<INavbar> = () => {
           </Link>
         ))}
       </List>
-      {/* <Divider /> */}
-      {/* <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List> */}
+  
     </Box>
   );
   return (

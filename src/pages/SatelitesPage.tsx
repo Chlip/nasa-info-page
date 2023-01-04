@@ -117,10 +117,8 @@ const SatelitesPage: React.FunctionComponent<ISatelitesPage> = () => {
           >
             <MenuItem value={"period"}>period</MenuItem>
             <MenuItem value={"popularity"}>popularity</MenuItem>
-            <MenuItem value={"inclination"}>inclination</MenuItem>
-            <MenuItem value={"eccentricity"}>eccentricity</MenuItem>
             <MenuItem value={"name"}>name</MenuItem>
-            <MenuItem value={"id"}>id</MenuItem>
+            
           </Select>
         </FormControl>
         <MapContainer
