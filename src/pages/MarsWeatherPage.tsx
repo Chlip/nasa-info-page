@@ -109,8 +109,7 @@ const MarsWeatherPage: React.FunctionComponent<IMarsWeatherPage> = () => {
                 <MenuItem value={"min"}>min temp</MenuItem>
                 <MenuItem value={"max"}>max temp</MenuItem>
                 <MenuItem value={"pressure"}>pressure</MenuItem>
-                <MenuItem value={"sunset"}>sunset</MenuItem>
-                <MenuItem value={"sunrise"}>sunrise</MenuItem>
+               
               </Select>
             </FormControl>
             <FormControl sx={{ m: 1 }}>
@@ -126,8 +125,7 @@ const MarsWeatherPage: React.FunctionComponent<IMarsWeatherPage> = () => {
                 <MenuItem value={"min"}>min temp</MenuItem>
                 <MenuItem value={"max"}>max temp</MenuItem>
                 <MenuItem value={"pressure"}>pressure</MenuItem>
-                <MenuItem value={"sunset"}>sunset</MenuItem>
-                <MenuItem value={"sunrise"}>sunrise</MenuItem>
+                
               </Select>
             </FormControl>
             <FormControl sx={{ m: 1 }}>
