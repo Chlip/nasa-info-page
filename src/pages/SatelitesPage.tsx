@@ -158,7 +158,7 @@ const SatelitesPage: React.FunctionComponent<ISatelitesPage> = () => {
           </SVGOverlay>
         </MapContainer>
         {isLoading ? (
-          "fetching"
+          <CircularProgress/>
         ) : (
           <div style={{ height: 700, width: "100%" }}>
             <DataGrid

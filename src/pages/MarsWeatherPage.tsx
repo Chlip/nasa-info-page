@@ -1,5 +1,6 @@
 import {
   Box,
+  CircularProgress,
   FormControl,
   InputLabel,
   MenuItem,
@@ -78,7 +79,7 @@ const MarsWeatherPage: React.FunctionComponent<IMarsWeatherPage> = () => {
         }}
       >
         {isLoading ? (
-          "fetching"
+          <CircularProgress/>
         ) : (
           <div style={{ height: 700, width: "100%" }}>
             <DataGrid rows={modifiedData} columns={columns} />
